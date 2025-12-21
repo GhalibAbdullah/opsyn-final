@@ -1,0 +1,46 @@
+---
+title: "MCP"
+icon: 'brain'
+description: "Give AI access to your tools through OpSyn"
+---
+
+## What is an MCP?
+
+LLMs produce text by default, but they're evolving to be able to use tools too. Say you want to ask Claude what meetings you have tomorrow, it can happen if you give it access to your calendar.
+
+**These tools live in an MCP Server that has a URL**. You provide your LLM (or MCP Client) with this URL so it can access your tools.
+
+There are many [MCP clients](https://github.com/punkpeye/awesome-mcp-clients) you can use for this purpose, and the most popular ones today are Claude Desktop, Cursor and Windsurf.
+
+**Official docs:** [https://modelcontextprotocol.io/introduction](https://modelcontextprotocol.io/introduction)
+
+## MCPs on OpSyn
+
+To use MCPs on OpSyn, you can connect any of the available MCP tools and get an MCP Server URL. Then, you'll configure your LLM to work with it.
+
+## Use OpSyn MCP Server
+
+1. **You need to run OpSyn.** You can self-host it in your machine or infrastructure.
+
+   ***All our MCP tools are open source.***
+
+<CardGroup cols={1}>
+  <Card title="Self-hosting" icon="download" color="#248fe0" href="/install/overview">
+    Deploy OpSyn using Docker or one of the other methods
+  </Card>
+</CardGroup>
+
+2. **Connect your tools.** Go to AI → MCP in your OpSyn Dashboard, and start connecting the tools that you want to give AI access to.
+
+3. **Follow the instructions.** Click on your choice of MCP client (Claude Desktop, Cursor or Windsurf) and follow the instructions.
+
+4. **Chat with your LLM with superpowers 🚀**
+
+
+## Things to Try Out with the MCP
+
+- Cancel all my meetings for tomorrow
+- What tasks do I have to do today?
+- Tweet this idea for me
+
+And many more!
