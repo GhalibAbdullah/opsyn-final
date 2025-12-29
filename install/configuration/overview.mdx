@@ -1,0 +1,70 @@
+---
+title: "Deployment Checklist"
+description: "Checklist to follow after deploying OpSyn"
+icon: "list"
+---
+
+<Info>
+This tutorial assumes you have already followed the quick start guide using one of the installation methods listed in [Install Overview](../overview). 
+</Info>
+
+In this section, we will go through the checklist after using one of the installation methods and ensure that your deployment is production-ready.
+
+<AccordionGroup>
+<Accordion title="Decide on Sandboxing" icon="code">
+
+You should decide on the sandboxing mode for your deployment based on your use case and whether it is multi-tenant or not. Here is a simplified way to decide:
+
+<Tip>
+**Friendly Tip #1**: For multi-tenant setups, use V8/Code Sandboxing. 
+
+It is secure and does not require privileged Docker access in Kubernetes. 
+Privileged Docker is usually not allowed to prevent root escalation threats.
+</Tip>
+
+<Tip>
+**Friendly Tip #2**: For single-tenant setups, use No Sandboxing. It is faster and does not require privileged Docker access.
+</Tip>
+
+<Snippet file="execution-mode.mdx" />
+
+More Information at [Sandboxing & Workers](../architecture/workers#sandboxing)
+</Accordion>
+<Accordion title="Platform Setup (Optional)" icon="building">
+
+After installation, configure your platform settings:
+
+1. Go to **Platform Admin** to set up branding, users, and security settings.
+2. Configure AI providers under **Platform Admin → Setup → AI**.
+3. Set up project roles and permissions as needed.
+
+</Accordion>
+<Accordion title="Setup HTTPS" icon="lock">
+Setting up HTTPS is highly recommended because many services require webhook URLs to be secure (HTTPS). This helps prevent potential errors.
+
+To set up SSL, you can use any reverse proxy. For a step-by-step guide, check out our example using [Nginx](./setup-ssl).
+</Accordion>
+<Accordion title="Configure S3 (Optional)" icon="cloud">
+Run logs and files are stored in the database by default, but you can switch to S3 later without any migration; for most cases, the database is enough.
+
+It's recommended to start with the database and switch to S3 if needed. After switching, expired files in the database will be deleted, and everything will be stored in S3. No manual migration is needed.
+
+Configure the following environment variables:
+
+- `AP_S3_ACCESS_KEY_ID`
+- `AP_S3_SECRET_ACCESS_KEY`
+- `AP_S3_ENDPOINT`
+- `AP_S3_BUCKET`
+- `AP_S3_REGION`
+- `AP_MAX_FILE_SIZE_MB`
+- `AP_FILE_STORAGE_LOCATION` (set to `S3`)
+- `AP_S3_USE_SIGNED_URLS`
+<Tip>
+**Friendly Tip #1**: If the S3 bucket supports signed URLs but needs to be accessible over a public network, you can set `AP_S3_USE_SIGNED_URLS` to `true` to route traffic directly to S3 and reduce heavy traffic on your API server.
+</Tip>
+
+</Accordion>
+<Accordion title="Troubleshooting (Optional)" icon="wrench">
+    If you encounter any issues, check out our [Troubleshooting](./troubleshooting) guide.
+</Accordion>
+</AccordionGroup>
