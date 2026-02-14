@@ -12,7 +12,6 @@
     "dev": "node tools/scripts/install-bun.js && concurrently -n \"GUI,API,ENG\" -c \"bgBlue.bold,bgGreen.bold,bgRed.bold\" \"npm:serve:frontend\" \"npm:serve:backend\" \"npm:serve:engine\"",
     "dev:backend": "concurrently -n \"API,ENG\" -c \"bgGreen.bold,bgRed.bold\" \"npm:serve:backend\" \"npm:serve:engine\"",
     "dev:frontend": "concurrently -n \"GUI,API,ENG\" -c \"bgBlue.bold,bgGreen.bold,bgRed.bold\" \"npm:serve:frontend\" \"npm:serve:backend\" \"npm:serve:engine\"",
-    "start": "node tools/scripts/install-bun.js && bun install && npm run dev",
     "test:e2e": "nx run tests-e2e:test-e2e",
     "cli": "npx ts-node -r tsconfig-paths/register --project packages/cli/tsconfig.json  packages/cli/src/index.ts",
     "create-piece": "npx ts-node -r tsconfig-paths/register --project packages/cli/tsconfig.json  packages/cli/src/index.ts pieces create",
@@ -26,7 +25,12 @@
     "pull-i18n": "crowdin pull --config crowdin.yml",
     "push-i18n": "crowdin upload sources",
     "i18n:extract": "i18next --config packages/react-ui/i18next-parser.config.js",
-    "bump-translated-pieces": "npx ts-node --project tools/tsconfig.tools.json tools/scripts/pieces/bump-translated-pieces.ts"
+    "bump-translated-pieces": "npx ts-node --project tools/tsconfig.tools.json tools/scripts/pieces/bump-translated-pieces.ts",
+    "build:frontend": "npx nx build react-ui --configuration=production",
+    "build:backend": "npx nx build server-api --configuration=production",
+    "build:engine": "npx nx build engine --configuration=production",
+    "start:backend": "node dist/packages/server-api/main.js",
+    "start:engine": "node dist/packages/engine/main.js"
   },
   "private": true,
   "dependencies": {
