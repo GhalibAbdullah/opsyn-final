@@ -30,7 +30,8 @@
     "build:backend": "npx nx build server-api --configuration=production",
     "build:engine": "npx nx build engine --configuration=production",
     "start:backend": "node dist/packages/server-api/main.js",
-    "start:engine": "node dist/packages/engine/main.js"
+    "start:engine": "node dist/packages/engine/main.js",
+    "start:render": "npx nx run-many --target=build --projects=server-api,engine,react-ui && node dist/packages/server-api/main.js & node dist/packages/engine/main.js"
   },
   "private": true,
   "dependencies": {
