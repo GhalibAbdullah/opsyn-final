@@ -1,11 +1,21 @@
 services:
   - type: web
-    name: activepieces-server
+    name: activepieces-api
     runtime: node
     plan: free
-    rootDir: packages/server
-    buildCommand: npm install && npm run build
-    startCommand: npm run start
-    envVars:
-      - key: NODE_ENV
-        value: production
+    buildCommand: npm install && npm run build:backend
+    startCommand: npm run start:backend
+
+  - type: web
+    name: activepieces-frontend
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build:frontend
+    startCommand: npx serve -s dist/packages/react-ui
+
+  - type: worker
+    name: activepieces-engine
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build:engine
+    startCommand: npm run start:engine
